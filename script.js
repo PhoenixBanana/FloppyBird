@@ -105,13 +105,28 @@ function update() {
   requestAnimationFrame(update);
 }
 
-// Event listener for bird flap
+// Reset game
+function resetGame() {
+  birdY = canvas.height / 2;
+  birdVelocity = 0;
+  birdFlap = false;
+  obstacles = [];
+  frame = 0;
+  score = 0;
+  gameOver = false;
+  update();
+}
+
+// Event listener for bird flap and game reset
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space' || e.code === 'ArrowUp') {
-    birdFlap = true;
+    if (gameOver) {
+      resetGame();
+    } else {
+      birdFlap = true;
+    }
   }
 });
 
 // Start the game
 update();
-
